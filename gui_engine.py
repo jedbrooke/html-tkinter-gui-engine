@@ -476,9 +476,13 @@ class Window():
         """creates a text input with the necessary tkinter widgets and back end in the Form class"""
         var = tk.StringVar()
         default = TagUtility.get_attribute(input_tag,"default")
+        hidden = TagUtility.get_attribute(input_tag,"hidden")
         if default:
             var.set(default)
         entry = tk.Entry(parent,textvariable=var)
+        if hidden:
+            entry.config(show="\u2022")
+
         entry.grid(TagUtility.get_grid_args(input_tag))
         self.form.add_field(Field(str,TagUtility.get_attribute(input_tag,"name"),var))
         return entry
